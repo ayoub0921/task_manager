@@ -81,7 +81,7 @@ const Layout = () => {
     return (
         <div className='absolute left-[50%] top-[50%] lg:w-[500px]   transform translate-x-[-50%] translate-y-[-50%]'>
             <div className='flex items-center justify-between pb-8'>
-                <h1 className='text-4xl font-bold text-white tracking-widest'>TODO</h1>
+                <h1 className='text-4xl font-bold text-white tracking-widest'>FOR NAKAMA</h1>
                 {theme === "light" ? <FaRegMoon onClick={() => setTheme("dark")} size={30} className='text-white cursor-pointer' />
                     : <IoIosSunny onClick={() => setTheme("light")} size={30} className='text-white cursor-pointer' />}
             </div>
