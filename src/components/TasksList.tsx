@@ -40,7 +40,7 @@ const TasksList = ({ tasks, handleDeleteTask, toogleTaskStatus, clearCompletedTa
 
 
     return (
-        <div className='bg-white dark:bg-very-dark-desaturated-blue  shadow-sm rounded-sm mt-4'>
+        <div className='bg-white dark:bg-very-dark-desaturated-blue   shadow-sm rounded-sm mt-4'>
             {tasks.length === 0 && <div className="p-4 text-center">No task found</div>}
             {tasks.map((task) => (
                 <div key={task.id} className='flex items-center  justify-between p-4 border-b border-gray-200'>
