@@ -47,7 +47,7 @@ const TasksList = ({ tasks, handleDeleteTask, toogleTaskStatus, clearCompletedTa
             {tasks.map((task) => (
                 <div key={task.id} className='flex items-center  justify-between p-4 border-b border-gray-200'>
                     <div className='flex items-center'>
-                        <span onClick={() => toogleTaskStatus(task.id)} className={`border dark:border-dark-grayish-blue rounded-full w-6 h-6 flex items-center justify-center 
+                        <span style={{cursor:"pointer"}} onClick={() => toogleTaskStatus(task.id)} className={`border dark:border-dark-grayish-blue rounded-full w-6 h-6 flex items-center justify-center 
                             ${task?.status === 'Completed' ? 'border-dark-grayish-blue bg-bright-blue' : 'border-gray'}`}>
                             {task?.status === "Completed" && <IoMdCheckmark className="w-[80%] h-[80%] text-white" />}
                         </span>
