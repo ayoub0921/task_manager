@@ -1,12 +1,8 @@
 import { useState } from "react";
-import { Task } from "./Layout";
 import { tasksStore } from "@/store";
 
 
-// interface AddTasksProps {
 
-//     handleAddTask: (task: Task) => void
-// }
 
 const AddTasks = () => {
     const [taskTitle, setTaskTitle] = useState("");
