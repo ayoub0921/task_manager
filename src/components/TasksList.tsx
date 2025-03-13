@@ -10,7 +10,7 @@ interface TasksProps {
     tasks: Task[]
     handleDeleteTask: (id: number) => void
     toogleTaskStatus: (id: number) => void
-    filter:any
+    filter: any
     setFilter: (status: "All" | "Active" | "Completed") => void
     clearCompletedTasks: () => void
 }
@@ -36,7 +36,7 @@ interface TasksProps {
 //     },
 // ]
 
-const TasksList = ({ tasks, handleDeleteTask, toogleTaskStatus, clearCompletedTasks,filter , setFilter }: TasksProps) => {
+const TasksList = ({ tasks, handleDeleteTask, toogleTaskStatus, clearCompletedTasks, filter, setFilter }: TasksProps) => {
 
 
     return (
@@ -63,22 +63,35 @@ const TasksList = ({ tasks, handleDeleteTask, toogleTaskStatus, clearCompletedTa
                     </button>
                 </div>
             ))}
-            <div className="flex justify-between items-center text-sm p-4">
-                <span>{tasks.length} items left</span>
+            <div className="flex justify-between items-center text-sm p-4 bg-white dark:bg-very-dark-desaturated-blue rounded-b-lg shadow-md">
+                {/* Task count */}
+                <span className="text-dark-grayish-blue dark:text-light-grayish-blue">{tasks.length} items left</span>
+
+                {/* Filter options */}
                 <ul className="flex items-center gap-3">
-                    {["All", "Active", "Completed"].map((status, index) => (
+                    {["All", "Active", "Completed"].map((status) => (
                         <li
-                            key={index}
+                            key={status}
                             onClick={() => setFilter(status as "All" | "Active" | "Completed")}
-                            style={{ cursor: "pointer" ,}}
-                            className={`${filter === status ? "text-bright-blue":""}`}
+                            className={`cursor-pointer transition-colors ${filter === status ? "text-bright-blue font-bold" : "text-dark-grayish-blue hover:text-black dark:hover:text-white"
+                                }`}
+                            aria-label={`Filter by ${status}`}
                         >
                             {status}
                         </li>
                     ))}
                 </ul>
-                <button onClick={clearCompletedTasks} style={{ cursor: "pointer" }}>Clear completed</button>
+
+                {/* Clear Completed Button */}
+                <button
+                    onClick={clearCompletedTasks}
+                    className="cursor-pointer text-dark-grayish-blue hover:text-red-500 transition-colors"
+                    aria-label="Clear completed tasks"
+                >
+                    Clear Completed
+                </button>
             </div>
+
         </div>
     );
 };

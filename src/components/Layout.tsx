@@ -3,7 +3,7 @@ import { IoIosSunny } from "react-icons/io";
 import { useTheme } from "@/components/theme-provider"
 import { FaRegMoon } from "react-icons/fa";
 import AddTasks from './AddTasks';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 
 export interface Task {
@@ -21,7 +21,10 @@ const Layout = () => {
 
 
 
-    const [filter,setFilter] = useState<'All' | 'Completed' | 'Active'>("All")
+    // Reference to task list to preserve scroll position
+    const taskListRef = useRef<HTMLDivElement>(null);
+
+    const [filter, setFilter] = useState<'All' | 'Completed' | 'Active'>("All")
 
 
     const [tasks, setTasks] = useState(() => {
@@ -34,6 +37,10 @@ const Layout = () => {
 
     const handleAddTask = (task: Task) => {
         setTasks([...tasks, task])
+
+        setTimeout(() => {
+            taskListRef.current?.scrollTo({ top: taskListRef.current.scrollHeight, behavior: "smooth" });
+        }, 100);
     }
 
 
@@ -60,16 +67,16 @@ const Layout = () => {
         console.log(tasks)
     }
 
-   
 
-    const filteredTasks = tasks.filter((task:Task) =>
+
+    const filteredTasks = tasks.filter((task: Task) =>
         filter === "All" ? true : task.status === filter
     );
 
 
     const clearCompletedTasks = () => {
-        setTasks([])
-    }
+        setTasks((prevTasks: any) => prevTasks.filter((task: Task) => task.status !== "Completed"));
+    };
 
 
     useEffect(() => {
@@ -86,7 +93,13 @@ const Layout = () => {
                     : <IoIosSunny onClick={() => setTheme("light")} size={30} className='text-white cursor-pointer' />}
             </div>
             <AddTasks handleAddTask={handleAddTask} />
-            <TasksList clearCompletedTasks={clearCompletedTasks} filter={filter} setFilter={setFilter} toogleTaskStatus={toogleTaskStatus} handleDeleteTask={handleDeleteTask}  tasks={filteredTasks} />
+            <div
+                ref={taskListRef}
+                className="max-h-96 overflow-auto"
+            >
+
+                <TasksList clearCompletedTasks={clearCompletedTasks} filter={filter} setFilter={setFilter} toogleTaskStatus={toogleTaskStatus} handleDeleteTask={handleDeleteTask} tasks={filteredTasks} />
+            </div>
         </div>
     )
 }
