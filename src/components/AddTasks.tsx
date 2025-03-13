@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { Task } from "./Layout";
+import { tasksStore } from "@/store";
 
 
-interface AddTasksProps {
+// interface AddTasksProps {
 
-    handleAddTask: (task: Task) => void
-}
+//     handleAddTask: (task: Task) => void
+// }
 
-const AddTasks = ({ handleAddTask }: AddTasksProps) => {
+const AddTasks = () => {
     const [taskTitle, setTaskTitle] = useState("");
+
+    const {addTask} = tasksStore()
 
 
 
@@ -23,7 +26,8 @@ const AddTasks = ({ handleAddTask }: AddTasksProps) => {
             status: "Active" as "Completed" | "Active",
         };
 
-        handleAddTask(newTask);
+        addTask(newTask);
+        alert("✅ Task is added succesfully ")
         setTaskTitle("");
     };
 

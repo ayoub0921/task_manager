@@ -1,53 +1,55 @@
 import { IoMdCheckmark } from "react-icons/io";
-import { Task } from "./Layout";
 import { IoCloseOutline } from "react-icons/io5";
+import { tasksStore } from "@/store";
+import { Task } from "@/types/types";
 
 
 
 
 
+const TasksList = () => {
 
-interface TasksProps {
 
-    tasks: Task[]
-    handleDeleteTask: (id: number) => void
-    toogleTaskStatus: (id: number) => void
-    filter: any
-    setFilter: (status: "All" | "Active" | "Completed") => void
-    clearCompletedTasks: () => void
-}
+    const { tasks, deleteTask , deletCompletedTask , toogleStatus , filter , setFilter} = tasksStore();
 
-// interface Task {
+    const filteredTasks = tasks.filter((task: Task) =>
+        filter === "All" ? true : task.status === filter
+    );
 
-//     id: number;
-//     title: string;
-//     status: 'completed' | 'active'
-// }
+    console.log(filteredTasks)
 
-// const tasks = [
+    const handleDeleteTask = (id: number) => {
 
-//     {
-//         id:1,
-//         title:"task 1",
-//         status:"completed"
-//     },
-//     {
-//         id:2,
-//         title:"task 2",
-//         status:"completed"
-//     },
-// ]
+        const confirmDeleteTask = window.confirm("Are you shure to delete this task❗️");
 
-const TasksList = ({ tasks, handleDeleteTask, toogleTaskStatus, clearCompletedTasks, filter, setFilter }: TasksProps) => {
+
+        if (confirmDeleteTask) {
+
+
+            deleteTask(id)
+        }
+
+    }
+
+    const handeClearCompletedTask = () => {
+        const confirmDeleteCompletedTask = window.confirm("Are you shure to delete completed tasks❗️");
+
+        if (confirmDeleteCompletedTask) {
+            deletCompletedTask()
+        }
+    }
+
+
+
 
 
     return (
         <div className='bg-white dark:bg-very-dark-desaturated-blue   shadow-sm rounded-sm mt-4'>
-            {tasks.length === 0 && <div className="p-4 text-center">No task found</div>}
-            {tasks.map((task) => (
+            {filteredTasks.length === 0 && <div className="p-4 text-center">No task found</div>}
+            {filteredTasks.map((task) => (
                 <div key={task.id} className='flex items-center  justify-between p-4 border-b border-gray-200'>
                     <div className='flex items-center'>
-                        <span style={{cursor:"pointer"}} onClick={() => toogleTaskStatus(task.id)} className={`border dark:border-dark-grayish-blue rounded-full w-6 h-6 flex items-center justify-center 
+                        <span style={{ cursor: "pointer" }} onClick={() => toogleStatus(task.id)} className={`border dark:border-dark-grayish-blue rounded-full w-6 h-6 flex items-center justify-center 
                             ${task?.status === 'Completed' ? 'border-dark-grayish-blue bg-bright-blue' : 'border-gray'}`}>
                             {task?.status === "Completed" && <IoMdCheckmark className="w-[80%] h-[80%] text-white" />}
                         </span>
@@ -60,7 +62,7 @@ const TasksList = ({ tasks, handleDeleteTask, toogleTaskStatus, clearCompletedTa
                             handleDeleteTask(task.id)
                         }}
                     >
-                        <IoCloseOutline style={{cursor:'pointer'}} size={20} />
+                        <IoCloseOutline style={{ cursor: 'pointer' }} size={20} />
                     </button>
                 </div>
             ))}
@@ -85,7 +87,7 @@ const TasksList = ({ tasks, handleDeleteTask, toogleTaskStatus, clearCompletedTa
 
                 {/* Clear Completed Button */}
                 <button
-                    onClick={clearCompletedTasks}
+                    onClick={handeClearCompletedTask}
                     className="cursor-pointer text-dark-grayish-blue hover:text-red-500 transition-colors"
                     aria-label="Clear completed tasks"
                 >

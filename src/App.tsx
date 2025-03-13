@@ -2,10 +2,12 @@ import largImgLight from "./assets/images/bg-desktop-light.jpg"
 import largImgDark from "./assets/images/bg-desktop-dark.jpg"
 import Layout from "./components/Layout"
 import { useTheme } from "./components/theme-provider"
+import { tasksStore } from "./store"
 
 
 const App = () => {
   const { theme } = useTheme()
+
   return (
     <div
       className="relative w-full h-screen bg-cover bg-center"
