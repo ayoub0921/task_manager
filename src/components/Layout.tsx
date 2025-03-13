@@ -10,7 +10,7 @@ export interface Task {
 
     id: number;
     title: string;
-    status: 'Completed' | 'Active'
+    status: 'ALL' | 'Completed' | 'Active'
 }
 
 
@@ -36,8 +36,9 @@ const Layout = () => {
 
 
     const handleAddTask = (task: Task) => {
-        setTasks([...tasks, task])
+        setTasks([task, ...tasks])
 
+        alert("✅ Task is added succesfully ")
         setTimeout(() => {
             taskListRef.current?.scrollTo({ top: taskListRef.current.scrollHeight, behavior: "smooth" });
         }, 100);
@@ -46,9 +47,16 @@ const Layout = () => {
 
     const handleDeleteTask = (id: number) => {
 
-        const deletedTask = tasks.filter((task: Task) => task.id !== id);
+        const confirmDeleteTask = window.confirm("Are you shure to delete this task❗️");
 
-        setTasks(deletedTask)
+
+        if (confirmDeleteTask) {
+
+            const deletedTask = tasks.filter((task: Task) => task.id !== id);
+
+            setTasks(deletedTask)
+        }
+
     }
 
 
@@ -75,7 +83,12 @@ const Layout = () => {
 
 
     const clearCompletedTasks = () => {
-        setTasks((prevTasks: any) => prevTasks.filter((task: Task) => task.status !== "Completed"));
+
+        const confirmDeleteCompletedTask = window.confirm("Are you shure to delete completed tasks❗️");
+
+        if (confirmDeleteCompletedTask) {
+            setTasks((prevTasks: any) => prevTasks.filter((task: Task) => task.status !== "Completed"));
+        }
     };
 
 
@@ -86,9 +99,9 @@ const Layout = () => {
 
 
     return (
-        <div className='absolute left-[50%] top-[50%] lg:w-[500px]   transform translate-x-[-50%] translate-y-[-50%]'>
+        <div className='absolute left-[50%] top-[50%] lg:w-[500px] py-6  transform translate-x-[-50%] translate-y-[-50%]'>
             <div className='flex items-center justify-between pb-8'>
-                <h1 className='text-4xl font-bold text-white tracking-widest'>FOR NAKAMA</h1>
+                <h1 className='text-2xl font-bold text-white tracking-widest'>NAKATASKS</h1>
                 {theme === "light" ? <FaRegMoon onClick={() => setTheme("dark")} size={30} className='text-white cursor-pointer' />
                     : <IoIosSunny onClick={() => setTheme("light")} size={30} className='text-white cursor-pointer' />}
             </div>

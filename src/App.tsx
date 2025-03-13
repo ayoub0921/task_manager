@@ -3,8 +3,9 @@ import largImgDark from "./assets/images/bg-desktop-dark.jpg"
 import Layout from "./components/Layout"
 import { useTheme } from "./components/theme-provider"
 
+
 const App = () => {
-      const { theme } = useTheme()
+  const { theme } = useTheme()
   return (
     <div
       className="relative w-full h-screen bg-cover bg-center"
@@ -16,7 +17,7 @@ const App = () => {
       >
 
       </div>
-      <Layout/>
+      <Layout />
       <div className="absolute dark:bg-very-dark-blue -z-10 h-full w-full"></div>
     </div>
   )

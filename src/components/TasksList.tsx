@@ -1,5 +1,7 @@
 import { IoMdCheckmark } from "react-icons/io";
 import { Task } from "./Layout";
+import { IoCloseOutline } from "react-icons/io5";
+
 
 
 
@@ -54,12 +56,11 @@ const TasksList = ({ tasks, handleDeleteTask, toogleTaskStatus, clearCompletedTa
                         </p>
                     </div>
                     <button
-                        className="text-[15px] font-mono"
                         onClick={() => {
                             handleDeleteTask(task.id)
                         }}
                     >
-                        X
+                        <IoCloseOutline style={{cursor:'pointer'}} size={20} />
                     </button>
                 </div>
             ))}

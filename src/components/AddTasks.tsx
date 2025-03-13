@@ -4,28 +4,27 @@ import { Task } from "./Layout";
 
 interface AddTasksProps {
 
-    handleAddTask: (task:Task) => void
+    handleAddTask: (task: Task) => void
 }
 
-const AddTasks = ({handleAddTask}: AddTasksProps) => {
-    const [taskTitle, setTaskTitle] = useState(""); 
-   
+const AddTasks = ({ handleAddTask }: AddTasksProps) => {
+    const [taskTitle, setTaskTitle] = useState("");
+
+
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (taskTitle.trim() === "") return; 
+        if (taskTitle.trim() === "") return;
 
-
-        console.log(taskTitle)
 
         const newTask = {
-            id: Date.now(), 
+            id: Date.now(),
             title: taskTitle,
             status: "Active" as "Completed" | "Active",
         };
 
-        handleAddTask(newTask); 
-        setTaskTitle(""); 
+        handleAddTask(newTask);
+        setTaskTitle("");
     };
 
     return (
