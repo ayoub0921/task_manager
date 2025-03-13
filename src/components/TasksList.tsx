@@ -44,13 +44,13 @@ const TasksList = () => {
 
 
     return (
-        <div className='bg-white dark:bg-very-dark-desaturated-blue   shadow-sm rounded-sm mt-4'>
+        <div className='bg-white dark:bg-very-dark-desaturated-blue  shadow-sm rounded-sm mt-4'>
             {filteredTasks.length === 0 && <div className="p-4 text-center">No task found</div>}
             {filteredTasks.map((task) => (
                 <div key={task.id} className='flex items-center  justify-between p-4 border-b border-gray-200'>
                     <div className='flex items-center'>
                         <span style={{ cursor: "pointer" }} onClick={() => toogleStatus(task.id)} className={`border dark:border-dark-grayish-blue rounded-full w-6 h-6 flex items-center justify-center 
-                            ${task?.status === 'Completed' ? 'border-dark-grayish-blue bg-bright-blue' : 'border-gray'}`}>
+                            ${task?.status === 'Completed' ? 'border-dark-grayish-blue bg-gradient-to-r  to-[#B333FF] from-[#33C5FF]'  : 'border-gray'}`}>
                             {task?.status === "Completed" && <IoMdCheckmark className="w-[80%] h-[80%] text-white" />}
                         </span>
                         <p className={`text-[15px] ml-4 ${task.status === "Completed" ? 'line-through text-gray-500' : ''}`}>
@@ -66,7 +66,7 @@ const TasksList = () => {
                     </button>
                 </div>
             ))}
-            <div className="flex justify-between items-center text-sm p-4 bg-white dark:bg-very-dark-desaturated-blue rounded-b-lg shadow-md">
+            <div className="flex justify-between items-center text-[12px] p-4 bg-white dark:bg-very-dark-desaturated-blue rounded-b-lg shadow-md">
                 {/* Task count */}
                 <span className="text-dark-grayish-blue dark:text-light-grayish-blue">{tasks.length} items left</span>
 
@@ -76,7 +76,7 @@ const TasksList = () => {
                         <li
                             key={status}
                             onClick={() => setFilter(status as "All" | "Active" | "Completed")}
-                            className={`cursor-pointer transition-colors ${filter === status ? "text-bright-blue font-bold" : "text-dark-grayish-blue hover:text-black dark:hover:text-white"
+                            className={`cursor-pointer transition-colors ${filter === status ? "text-bright-blue font-bold" : "text-dark-grayish-blue hover:text-bright-blue dark:hover:text-white"
                                 }`}
                             aria-label={`Filter by ${status}`}
                         >

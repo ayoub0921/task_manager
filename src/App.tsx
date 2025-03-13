@@ -15,9 +15,7 @@ const App = () => {
       <div
         className="bg-cover bg-center w-full h-1/2"
         style={{ backgroundImage: `url(${theme === "light" ? largImgLight : largImgDark})` }}
-      >
-
-      </div>
+      />
       <Layout />
       <div className="absolute dark:bg-very-dark-blue -z-10 h-full w-full"></div>
     </div>
