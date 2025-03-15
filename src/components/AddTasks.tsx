@@ -23,7 +23,6 @@ const AddTasks = () => {
         };
 
         addTask(newTask);
-        alert("✅ Task is added succesfully ")
         setTaskTitle("");
     };
 
